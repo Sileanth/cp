@@ -2,12 +2,10 @@
 using namespace std;
 //1 wymiarowy union find bez rozmiaru zbiorów
 struct uf1d {
-    int n;
     vector<int> oj;
-    uf1d(int sajz) {
-        n = sajz;
-        oj.resize(sajz);
-        for(int i = 1; i <= sajz; i++) {
+    uf1d(int n) {
+        oj.resize(n+1);
+        for(int i = 1; i <= n; i++) {
             oj[i] = i;
         }
     }

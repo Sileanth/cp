@@ -1,15 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 //1 wymiarowy union find z rozmiarem zbiorów
-struct uf1d_s {
-    int n;
+struct uf1ds {
     vector<int> oj;
     vector<int> sajz;
-    uf1d_s(int sajz) {
-        n = sajz;
-        oj.resize(sajz+1);
-        sajz.resize(sajz+1,1);
-        for(int i = 1; i <= sajz; i++) {
+    uf1ds(int n) {
+        oj.resize(n+1);
+        sajz.resize(n+1,1);
+        for(int i = 1; i <= n; i++) {
             oj[i] = i;
         }
     }
