@@ -19,7 +19,7 @@ struct uf2d {
     pair<int,int> szuk(int x, int y) { 
         return (oj[x][y] == make_pair(x,y)) ? oj[x][y] : oj[x][y] = szuk(oj[x][y]); 
     }
-    void loncz(pair<int,int> a, pair<int,int> b) { 
+    void loncz(pair<int,int> a, pair<int,int> b) { //dołącza spójną b do spójnej a 
         a = szuk(a); b= szuk(b);
         oj[b.first][b.second] = a; 
         sajz[a.first][a.second] += sajz[b.first][b.second];

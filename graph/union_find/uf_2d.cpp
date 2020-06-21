@@ -14,13 +14,14 @@ struct uf2d {
     pair<int,int> szuk(pair<int,int> x) { 
         return (oj[x.first][x.second] == x) ? x : oj[x.first][x.second] = szuk(oj[x.first][x.second]); 
     }
-    void loncz(pair<int,int> a, pair<int,int> b) { 
-        a = szuk(a);
-        oj[a.first][a.second] = szuk(b); 
-    }
     pair<int,int> szuk(int x, int y) { 
         return (oj[x][y] == make_pair(x,y)) ? oj[x][y] : oj[x][y] = szuk(oj[x][y]); 
     }
+    void loncz(pair<int,int> a, pair<int,int> b) { //dołącza spójną b do spójnej a 
+        b = szuk(b);
+        oj[b.first][b.second] = szuk(a); 
+    }
+    
 };
 
 int main() {

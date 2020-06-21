@@ -14,13 +14,25 @@ struct uf1ds {
     int szuk(int u) { 
         return (oj[u] == u) ? oj[u] : oj[u] = szuk(oj[u]); 
     }
-    void loncz(int x, int y) { 
+    void loncz(int x, int y) { //dołącza spójną y do spójnej x 
         x = szuk(x); y = szuk(y);
         sajz[x] += sajz[y];
-        oj[x] = y;
+        oj[y] = x;
     }
 };
 
 int main() {
-    
+    int n,q; cin >> n >> q;
+    uf1ds uf(n);
+    while(q--) {
+        int typ; cin >> typ;
+        if(typ) {
+            int a, b; cin >> a >> b;
+            uf.loncz(a,b);
+        }
+        else {
+            int a; cin >> a;
+            cout <<"ojciec " << uf.szuk(a) << " rozmiar" << uf.sajz[uf.szuk(a)] << "\n";
+        }
+    }
 }
