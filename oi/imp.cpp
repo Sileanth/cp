@@ -1,46 +1,40 @@
 using namespace std;
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+int n,m;
+const int maks = 3005;
+bool exi[maks]; 
+bool t[maks][maks];
 
-struct uf1ds {
-    vector<int> oj;
-    vector<int> sajz;
-    uf1ds(int n) {
-        oj.resize(n+1);
-        sajz.resize(n+1,1);
-        for(int i = 1; i <= n; i++) {
-            oj[i] = i;
-        }
-    }
-    int szuk(int u) { 
-        return (oj[u] == u) ? oj[u] : oj[u] = szuk(oj[u]); 
-    }
-    int rozm(int x) {
-        x = szuk(x);
-        return sajz[x];
-    }
-    void loncz(int x, int y) { //dołącza spójną y do spójnej x 
-        x = szuk(x); y = szuk(y);
-        sajz[x] += sajz[y];
-        oj[y] = x;
-    }
-};
-
-int main() {
-    int n,m; cin >> n >> m;
-    uf1ds uf(n);
-    int maks = 0;
-    int x= 0;
+void wczytaj() {
+    cin >> n >> m;
     while(m--) {
         int a,b; cin >> a >> b;
-        uf.loncz(a,b);
-        if(uf.sajz[uf.szuk(a)] > maks) {
-            maks = uf.sajz[uf.szuk(a)];
-            x = uf.szuk(a);
+        t[a][b] = true;
+        t[b][a] = true;
+    }
+    for(int i = 1; i <= n; i++) {
+        exi[i] = true;
+    }
+}
+int main() {
+     ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    wczytaj();
+    for(int i = 1; i <= n; i++) {
+        if(exi[i]) {
+            for(int j = 1; j<= n; j++) {
+                if(exi[j] && !t[i][j] && i != j) {
+                    exi[j] = false;
+                    exi[i] = false;
+                    break;
+                }
+            }
         }
     }
     int licz = n/3;
-    for(int i = 1; i <= n; i++) {
-        if(uf.szuk(i) == x) {
+    for(int i = 1; i <= n && licz; i++) {
+        if(exi[i]) {
             cout << i << " ";
             licz--;
         }
