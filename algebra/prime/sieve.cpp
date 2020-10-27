@@ -1,10 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int maks = 1e8;
+namespace sieve {
 vector<int> prime;
-bool p[maks];
+vector<bool> p;
 
 void sieve(int n) {
+    p.resize(n+1,0);
     p[0] = true;p[1] = true;
     for(int i = 2; i <= n; i++) {
         if(!p[i]) {
@@ -14,4 +15,6 @@ void sieve(int n) {
             }
         }
     }
+}
+
 }

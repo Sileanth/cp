@@ -14,13 +14,26 @@ int lcm (int a, int b) {
 }
 
 int egcd(int a, int b, int& x, int& y) {
-    x = 1, y = 0;
-    int x1 = 0, y1 = 1, a1 = a, b1 = b;
-    while (b1) {
-        int q = a1 / b1;
-        tie(x, x1) = make_tuple(x1, x - q * x1);
-        tie(y, y1) = make_tuple(y1, y - q * y1);
-        tie(a1, b1) = make_tuple(b1, a1 - q * b1);
+    if(b == 0) {
+        x = 1; y = 0;
+        return a;
     }
-    return a1;
+    int x1,y1;
+    int nwd = egcd(b,a%b,x1,y1);
+    x = y1;
+    y = x1-y1*(a/b);
+    return nwd;
 }
+
+
+bool dioph(int a, int b, int c, int &x, int &y) {
+    int nww = egcd(abs(a),abs(b),x,y);
+    if(c%nww)return false;
+    x = x*c/nww;
+    y = y*c/nww;
+    if(a<0)x*=-1;
+    if(b<0)y*=-1;
+    return true;
+}
+
+
