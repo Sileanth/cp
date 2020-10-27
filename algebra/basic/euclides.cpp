@@ -12,7 +12,7 @@ int gcd (int a, int b) {
 int lcm (int a, int b) {
     return a / gcd(a, b) * b;
 }
-
+// x*a+b*y = gcd(a,b) find gcd,x,y
 int egcd(int a, int b, int& x, int& y) {
     if(b == 0) {
         x = 1; y = 0;
@@ -25,7 +25,7 @@ int egcd(int a, int b, int& x, int& y) {
     return nwd;
 }
 
-
+//a*x+b*y=c  find x,y if exist
 bool dioph(int a, int b, int c, int &x, int &y) {
     int nww = egcd(abs(a),abs(b),x,y);
     if(c%nww)return false;
